@@ -1,13 +1,13 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const { UserModel } = require("../KeyAuth/database/db");
 
 const JWT_SECRET = "Your secret key";
 
 const app = express();
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static('public'));0
 
-const users = [];
 
 app.get("/", (req,res) => {
     res.sendFile(__dirname + "/public/index.html");
@@ -64,6 +64,7 @@ function auth(req, res, next) {
             return res.status(401).json({
                 message: "Token missing"
             });
+            
         }
         const decodedData = jwt.verify(token, JWT_SECRET);
 
