@@ -66,15 +66,16 @@ userRouter.post("/login", async (req, res) => {
 
 userRouter.get("/me", userMiddleware, async(req, res) => {
     const userId = req.userId
+    console.log("userId:", userId);
     try{
-        const user = UserModel.findById(userId);
+        const user = await UserModel.findById(userId).select("-password");
         if (!user) {
             return res.status(404).json({ msg: "USer not found"});
         }
         res.json({
             msg: "User found successfully",
             user: {
-                id: user._id,
+                id: user._id.toString(),
                 name: user.name,
                 email: user.email
             }
