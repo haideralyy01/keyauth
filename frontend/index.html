@@ -4,33 +4,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Authentication App</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
 </head>
 <body>
-    <div>
-        Signup
-        <input type="text", id="signup-name" placeholder="Name">
-        <input type="text", id="signup-email" placeholder="Email">
-        <input type="password", id="signup-password" placeholder="Password">
-        <button onclick="signup()" id="signup-btn">Sign Up</button>
+    <div class="container">
+        <div class="auth-container">
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button onclick="toggleCard('signup')" class="action-btn signup-btn" id="show-signup">
+                    <i class="bi bi-person-plus me-2"></i>Sign Up
+                </button>
+                <button onclick="toggleCard('login')" class="action-btn login-btn" id="show-login">
+                    <i class="bi bi-box-arrow-in-right me-2"></i>Login
+                </button>
+            </div>
+
+            <!-- Signup Expandable Card -->
+            <div id="signup-card" class="expandable-card hidden">
+                <div class="card-header" onclick="toggleCard('signup')">
+                    <h3>
+                        <i class="bi bi-person-plus"></i>
+                        Create Account
+                        <i class="bi bi-chevron-down ms-auto" style="font-size: 1.2rem;"></i>
+                    </h3>
+                </div>
+                <div id="signup-content" class="card-content">
+                    <div class="mb-3">
+                        <label for="signup-name" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="signup-name" placeholder="Enter your name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="signup-email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="signup-email" placeholder="Enter your email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="signup-password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="signup-password" placeholder="Create a password">
+                    </div>
+                    <button onclick="signup()" class="submit-btn signup" id="signup-btn">
+                        <i class="bi bi-person-plus me-2"></i>Sign Up
+                    </button>
+                </div>
+            </div>
+
+            <!-- Login Expandable Card -->
+            <div id="login-card" class="expandable-card hidden">
+                <div class="card-header" onclick="toggleCard('login')">
+                    <h3>
+                        <i class="bi bi-box-arrow-in-right"></i>
+                        Welcome Back
+                        <i class="bi bi-chevron-down ms-auto" style="font-size: 1.2rem;"></i>
+                    </h3>
+                </div>
+                <div id="login-content" class="card-content">
+                    <div class="mb-3">
+                        <label for="login-email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="login-email" placeholder="Enter your email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="login-password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="login-password" placeholder="Enter your password">
+                    </div>
+                    <button onclick="login()" class="submit-btn login" id="login-btn">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>Sign In
+                    </button>
+                </div>
+            </div>
+
+            <!-- User Information Card -->
+            <div id="user-info-card" class="user-info-card mt-4">
+                <div class="user-info-header">
+                    <i class="bi bi-person-circle"></i>
+                    <h4 class="mb-0">User Information</h4>
+                </div>
+                <div id="Information" class="user-info-content">
+                    <div class="info-item">
+                        <i class="bi bi-person"></i>
+                        <span>No user logged in</span>
+                    </div>
+                </div>
+                <button onclick="signout()" class="signout-btn" id="signout-btn">
+                    <i class="bi bi-box-arrow-right me-2"></i>Sign Out
+                </button>
+            </div>
+        </div>
     </div>
 
-    <div>
-        Login
-        <input type="text", id="login-email" placeholder="Email">
-        <input type="password", id="login-password" placeholder="Password">
-        <button onclick="login()" id="signup-btn">Sign In</button>
-    </div>
-
-    <div>
-        User Information
-        <div id="Information"></div>
-    </div>
-
-    <div>
-        <button onclick="signout()" id="signout-btn">Sign Out</button>
-    </div>
-
-    <script src="./script.js"></script>
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
