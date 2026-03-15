@@ -1,14 +1,15 @@
-import LoginPage from "./components/Login"
-// import SigninPage from "./components/Signup"
+import { Routes, Route, Navigate } from "react-router-dom";
+import LoginPage from "./components/Login";
+import SigninPage from "./components/Signup";
 
 function App() {
-
   return (
-    <>
-      {/* <SigninPage /> */}
-      <LoginPage />
-    </>
-  )
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/signup" element={<SigninPage />} />
+      <Route path="*" element={<Navigate to="/login" replace />} /> 
+    </Routes>
+  );
 }
 
-export default App
+export default App;
