@@ -15,7 +15,7 @@ const UserProfilePage = () => {
       <nav className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="text-xl font-bold text-gray-800">MyApp</div>
+            <div className="text-xl font-bold text-gray-800">KeyAuth</div>
               <button
                 className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200 transform hover:scale-[1.02] active:scale-[0.98] focus:ring-4 focus:ring-blue-300"
                 onClick={handleLogout}
