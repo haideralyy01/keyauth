@@ -1,16 +1,48 @@
-# React + Vite
+# KeyAuth Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend for the KeyAuth authentication system, built with React and Vite.
 
-Currently, two official plugins are available:
+## Features
+- User Signup and Login
+- Protected Dashboard/User Info Page
+- React Context for Auth State
+- Tailwind CSS for UI
+- Axios for API requests
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Getting Started
 
-## React Compiler
+### Prerequisites
+- Node.js (v18+ recommended)
+- npm or yarn
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Installation
+```bash
+cd frontend
+npm install
+```
 
-## Expanding the ESLint configuration
+### Running the Frontend
+```bash
+npm run dev
+```
+The app will be available at [http://localhost:5173](http://localhost:5173).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Environment Variables
+If you use a custom backend URL, create a `.env` file and set:
+```
+VITE_API_URL=http://localhost:3000
+```
+
+## Project Structure
+- `src/components/` — React components (Login, Signup, AppBar, etc.)
+- `src/context/AuthContext.jsx` — Authentication context
+- `src/index.css` — Tailwind CSS entry
+- `vite.config.js` — Vite configuration
+
+## API Endpoints Used
+- `POST /user/signup` — Signup
+- `POST /user/login` — Login
+
+## Notes
+- Make sure the backend is running and CORS is configured to allow requests from the frontend.
+- On successful signup/login, users are redirected to the dashboard.
