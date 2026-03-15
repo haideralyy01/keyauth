@@ -10,7 +10,7 @@ const LoginPage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('Form submitted');
-    // navigate('/dashboard');
+        navigate('/dashboard');
     };
 
   return (
@@ -65,7 +65,7 @@ const LoginPage = () => {
         </div>
 
         <button
-            type="signin"
+            type="button"
             onClick={handleLoginClick}
             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition duration-200 transform hover:scale-[1.02] active:scale-[0.98] focus:ring-4 focus:ring-blue-300"
           >

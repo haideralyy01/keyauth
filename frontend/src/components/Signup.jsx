@@ -8,6 +8,12 @@ const SigninPage = () => {
         navigate('/login');
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('Form submitted');
+        navigate('/dashboard');
+    };
+
   return (
     <div className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4">
       <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 space-y-6">
@@ -52,6 +58,7 @@ const SigninPage = () => {
 
           <button
             type="submit"
+            onClick={handleSubmit}
             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition duration-200 transform hover:scale-[1.02] active:scale-[0.98] focus:ring-4 focus:ring-blue-300"
           >
             Sign In
@@ -69,7 +76,7 @@ const SigninPage = () => {
         </div>
 
         <button
-            type="submit"
+            type="button"
             onClick={handleSigninClick}
             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition duration-200 transform hover:scale-[1.02] active:scale-[0.98] focus:ring-4 focus:ring-blue-300"
           >
