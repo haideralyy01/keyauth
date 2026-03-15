@@ -1,11 +1,11 @@
 import LoginPage from "./components/Login"
-import SigninPage from "./components/Signup"
+// import SigninPage from "./components/Signup"
 
 function App() {
 
   return (
     <>
-      <SigninPage />
+      {/* <SigninPage /> */}
       <LoginPage />
     </>
   )
