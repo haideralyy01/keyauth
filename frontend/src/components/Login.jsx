@@ -1,15 +1,31 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../context/AuthContext";
 
 const LoginPage = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const { login } = useAuth();
+    const { setUser } = useAuth();
+
+    const handleInputChange = (setter) => {
+        return (e) => setter(e.target.value);
+    }
 
     const handleLoginClick = () => {
         navigate('/signup');
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!email || !password) {
+            alert('Please fill in both email and password fields.');
+            return;
+        }
+        setUser({ email });
         console.log('Form submitted');
+        await login(email, password);
         navigate('/dashboard');
     };
 
@@ -30,16 +46,20 @@ const LoginPage = () => {
           <div>
             <input
               type="email"
+              value={email}
               placeholder="name@example.com"
+              onChange={handleInputChange(setEmail)}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200 bg-gray-50 hover:bg-white"
               required
             />
           </div>
-
+          
           <div>
             <input
               type="password"
+              value={password}
               placeholder="Password"
+              onChange={handleInputChange(setPassword)}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200 bg-gray-50 hover:bg-white"
               required
             />

@@ -1,16 +1,32 @@
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useAuth } from "../context/AuthContext";
 
 const SigninPage = () => {
-
     const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const { signup } = useAuth();
+    const { setUser } = useAuth();
+
+    const handleInputChange = (setter) => {
+        return (e) => setter(e.target.value);
+    }
 
     const handleSigninClick = () => {
         navigate('/login');
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!email || !password || !name) {
+          alert("Please fill the required details")
+          return;
+        }
+        setUser({ name, email });
         console.log('Form submitted');
+        await signup(email, password, name);
         navigate('/dashboard');
     };
 
@@ -32,27 +48,33 @@ const SigninPage = () => {
           <div>
             <input
               type="email"
+              value={email}
               placeholder="name@example.com"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200 bg-gray-50 hover:bg-white"
               required
+              onChange={handleInputChange(setEmail)}
             />
           </div>
 
           <div>
             <input
               type="password"
+              value={password}
               placeholder="Password"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200 bg-gray-50 hover:bg-white"
               required
+              onChange={handleInputChange(setPassword)}
             />
           </div>
 
           <div>
             <input
               type="name"
+              value={name}
               placeholder="Enter your name..."
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200 bg-gray-50 hover:bg-white"
               required
+              onChange={handleInputChange(setName)}
             />
           </div>
 

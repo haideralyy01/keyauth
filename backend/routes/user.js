@@ -15,13 +15,19 @@ userRouter.post('/signup', async (req, res) => {
         // Hash password before saving
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        await UserModel.create({
+        // Create user and get the created user document
+        const user = await UserModel.create({
             name,
             email,
             password: hashedPassword
         });
 
+        // Generate JWT token
+        const token = jwt.sign({ id: user._id.toString() }, JWT_SECRET, { expiresIn: "1h" });
+
         res.status(200).json({
+            token,
+            user,
             msg: "User signed up successfully"
         });
     } catch (error) {
@@ -54,6 +60,7 @@ userRouter.post("/login", async (req, res) => {
 
         res.json({
             token,
+            user,
             msg: "You have signed in"
         });
     } catch (error) {

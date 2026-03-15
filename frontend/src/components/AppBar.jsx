@@ -1,11 +1,8 @@
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../context/AuthContext";
 
 const UserProfilePage = () => {
-  // Sample user data - in real app, this would come from your auth context/state
-  const user = {
-    name: 'John Doe',
-    email: 'john.doe@example.com'
-  };
+  const { user } = useAuth();
   const navigate = useNavigate();
   const handleLogout = (e) => {
     e.preventDefault();
@@ -34,7 +31,7 @@ const UserProfilePage = () => {
         {/* Welcome Name at Top Left Below Navbar */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">
-            Welcome, <span className="text-blue-600">{user.name}</span>
+            Welcome, <span className="text-blue-600">{user?.name || 'User'}</span>
           </h1>
         </div>
 
@@ -46,7 +43,7 @@ const UserProfilePage = () => {
               <label className="block text-sm font-medium text-gray-500 mb-2">Email Address</label>
               <div className="flex items-center space-x-3">
                 <div className="p-2 bg-blue-100 rounded-lg"></div>
-                <p className="text-lg text-gray-900">{user.email}</p>
+                <p className="text-lg text-gray-900">{user?.email || 'No email'}</p>
             </div>
           </div>
         </div>
