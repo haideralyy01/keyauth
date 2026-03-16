@@ -1,15 +1,30 @@
 const { Router } = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const { z } = require('zod');
 const { JWT_SECRET } = require("../configurations/config");
 const { UserModel } = require("../database/db"); // Use one consistent model
-const { userMiddleware } = require("../middleware/user")
+const { userMiddleware } = require("../middleware/user");
 
 const userRouter = Router();
 
 // Signup Route
 userRouter.post('/signup', async (req, res) => {
-    const { name, email, password } = req.body;
+    const signupSchema = z.object({
+        name: z.string().min(1, "Name is required"),
+        email: z.string().email("Invalid email address"),
+        password: z.string().min(6, "Password must be at least 6 characters")
+    });
+
+    const parseResult = signupSchema.safeParse(req.body);
+    if (!parseResult.success) {
+        return res.status(400).json({
+            msg: "Validation error",
+            errors: parseResult.error.errors
+        });
+    }
+
+    const { name, email, password } = parseResult.data;
 
     try {
         // Hash password before saving
@@ -40,7 +55,20 @@ userRouter.post('/signup', async (req, res) => {
 
 // Login Route
 userRouter.post("/login", async (req, res) => {
-    const { email, password } = req.body;
+    const loginSchema = z.object({
+        email: z.string().email("Invalid email address"),
+        password: z.string().min(6, "Password must be at least 6 characters")
+    });
+
+    const parseResult = loginSchema.safeParse(req.body);
+    if (!parseResult.success) {
+        return res.status(400).json({
+            msg: "Validation error",
+            errors: parseResult.error.errors
+        });
+    }
+
+    const { email, password } = parseResult.data;
 
     try {
         const user = await UserModel.findOne({ email });
